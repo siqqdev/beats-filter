@@ -1,0 +1,26 @@
+.customSlider {
+    display: flex;
+    align-items: center;
+  }
+  
+  .slider {
+    width: 20%;
+    height: 10px;
+    background-color: #000000;
+    -webkit-appearance: none;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #ff0000;
+    cursor: pointer;
+    border: 2px solid #ff0000;
+    border-radius: 50%;
+    -webkit-appearance: none;
+  }
+  
+  .sliderValue {
+    margin-left: 10px;
+  }
+  
