@@ -1,57 +1,37 @@
 import axios from 'axios';
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react';
 import Player from './Player';
 import { dataProps } from './dataInterface';
 
-
-interface HomePageProps {
-
-}
+interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = (props) => {
+  const [genres, setGenres] = useState<string[]>([]);
+  const [receivedData, setReceivedData] = useState<any>(null);
 
-const [genres, setGenres] = useState<string[]>([]);
-const [receivedData, setReceivedData] = useState<any>(null);
+  const apiUrl = 'http://127.0.0.1:8000';
 
-const apiUrl = 'http://127.0.0.1:8000'
+  const handleGenre = (e: any) => {
+    const selectedGenre = e.target.value;
+    if (!genres.includes(selectedGenre) && selectedGenre !== 'All') {
+      setGenres([...genres, selectedGenre]);
+    }
+  };
 
-const handleGenre = (e: any) => {
-  const selectedGenre = e.target.value;
-  if (!genres.includes(selectedGenre) && selectedGenre !== 'All') {
-    setGenres([...genres, selectedGenre]);
-  }
-}
-
-const handleGenresSubmit = () => {
-  const filteredGenres = genres.join(',')
-  console.log(filteredGenres);
-  console.log(`${apiUrl}/api/beats/filter/?genres=${filteredGenres}`);
-  axios
-  .get(`${apiUrl}/api/beats/filter/?genres=${filteredGenres}`)
-  .then((response) => {
-    console.log('data received:', response.data);
-    setReceivedData(response.data)
-  })
-  .catch((error) =>
-    console.log('error:', error)
-  )
-  console.log(receivedData);
-  }
+  const handleGenresSubmit = () => {
+    const filteredGenres = genres.join(',');
+    axios
+      .get(`${apiUrl}/api/beats/filter/?genres=${filteredGenres}`)
+      .then((response) => {
+        setReceivedData(response.data);
+      })
+      .catch((error) => console.log('error:', error));
+  };
 
   return (
-    <div className='flex justify-center'>
-        <h1 className='mr-3 text-bold text-black'>Home</h1>
-        <br />
-        <br /><h2>Let's get started! What you would like to listen to?</h2>
-        <div>
-        <select name="genre" onChange={handleGenre} 
-        className='mr-3
-         bg-gray-500
-          text-white
-           text-bold
-           rounded 
-            ml-3'>  
+    <div className="h-screen flex flex-col items-center justify-start">
+      <div className="mt-10">
+        <select name="genre" onChange={handleGenre} className="p-2 bg-gray-500 text-white font-semibold rounded">
           <option value="HyperTrap">Hyper trap</option>
           <option value="NewzJazz">New jazz</option>
           <option value="DarkTrap">Dark trap</option>
@@ -69,31 +49,24 @@ const handleGenresSubmit = () => {
           <option value="Alternative">Alternative</option>
           <option value="All">All of them!</option>
         </select>
-        </div>
-        <div>
+      </div>
+      <div className="font-semibold mt-3">
         <ul>
           {genres.map((genre, index) => (
             <li key={index}>{genre}</li>
           ))}
         </ul>
-        </div>
-        
-        <button onClick={handleGenresSubmit} className=' bg-gray-500 
-        rounded 
-        font-bold
-         text-white
-         hover:bg-gray-700 
-        py-2 
-        px-4
-        
-        '>Let's Start!</button>
-        <div>
-
-        {receivedData && <Player receivedBeats={receivedData} />} 
-
-        </div>
+      </div>
+      <div>
+        <button onClick={handleGenresSubmit} className="bg-gray-500 rounded font-bold text-white hover:bg-gray-700 text-lg p-2 mt-3">
+          Let's Start!
+        </button>
+      </div>
+      <div className="mt-3">
+        {receivedData && <Player receivedBeats={receivedData} />}
+      </div>
     </div>
-  )
+  );
 };
- export default HomePage;
- 
+
+export default HomePage;

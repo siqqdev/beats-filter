@@ -1,26 +1,79 @@
-.customSlider {
-    display: flex;
-    align-items: center;
-  }
-  
-  .slider {
-    width: 20%;
-    height: 10px;
-    background-color: #000000;
-    -webkit-appearance: none;
-  }
-  
-  .slider::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-    background-color: #ff0000;
-    cursor: pointer;
-    border: 2px solid #ff0000;
-    border-radius: 50%;
-    -webkit-appearance: none;
-  }
-  
-  .sliderValue {
-    margin-left: 10px;
-  }
-  
+/* Стили для верхнего слайдера (громкость) */
+.sliderVolume {
+  display: block;
+  width: 10em; /* Ширина верхнего слайдера */
+  height: 0.3em;
+  background-color: #ffffff;
+  -webkit-appearance: none;
+  border-radius: 2em;
+}
+
+.sliderVolume::-webkit-slider-thumb {
+  width: 1em;
+  height: 1em;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  border-color: rgb(255, 255, 255);
+}
+
+.sliderTime {
+  display: block;
+  width: 16em; /* Ширина нижнего слайдера (увеличена) */
+  height: 0.3em;
+  background-color: #ffffff;
+  -webkit-appearance: none;
+  border-radius: 2em;
+}
+
+.sliderTime::-webkit-slider-thumb {
+  width: 1em;
+  height: 1em;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  border-color: rgb(255, 255, 255);
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.h-60 {
+  height: 15rem;
+}
+
+.bg-gray-900 {
+  background-color: #1a202c;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.space-y-4 {
+  margin-bottom: 1rem;
+}
+
+.space-x-4 {
+  margin-right: 1rem;
+}
+
