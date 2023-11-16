@@ -2,7 +2,7 @@ export interface dataProps {
     beatName: string;
     beatKey: string;
     beatBpm: number;
-    prodsNicknames: string;
+    prodNickNames: string;
     beatGenre: string[];
     beatFile: string;
     mp3LeasePrice: number;

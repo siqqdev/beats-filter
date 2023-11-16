@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Howl, Howler } from 'howler';
 import { debounce } from 'lodash';
 import styles from './styles/Player.module.css'
+import { dataProps } from './dataInterface';
 
 interface PlayerProps {
-  receivedBeats: any;
+  receivedBeats: dataProps[];
 }
 
 const Player: React.FC<PlayerProps> = (props) => {
@@ -18,12 +19,14 @@ const Player: React.FC<PlayerProps> = (props) => {
 
   useEffect(() => {
     if (props.receivedBeats) {
-      const mp3Beats = props.receivedBeats;
+      const mp3Beats = props.receivedBeats || [];
+      console.log(props.receivedBeats);
+      
       if (newSound && newSound.playing()) {
         newSound.stop();
       }
 
-      if (mp3Beats && mp3Beats[index] && mp3Beats[index].beatFile) {
+      if (mp3Beats && mp3Beats[index] && mp3Beats[index]?.beatFile) {
         const newSoundInstance = new Howl({
           src: [mp3Beats[index].beatFile],
           onload: () => {
@@ -45,6 +48,7 @@ const Player: React.FC<PlayerProps> = (props) => {
     }
   }, [props.receivedBeats, index, seekValue]);
 
+
   const stopSound = () => {
     if (newSound && newSound?.playing()) {
       newSound.stop();
@@ -57,21 +61,28 @@ const Player: React.FC<PlayerProps> = (props) => {
     }
   };
 
-  const handleVolumeChange = (e: any) => {
-    const newVolume = e.currentTarget.value;
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseInt(e.currentTarget.value, 10);
     setVolume(newVolume);
     if (newSound) {
       newSound.volume(newVolume / 100);
     }
   };
 
+  const volumeChange = (newVolume: number) => {
+    if (newSound) {
+      newSound.volume(newVolume / 100);
+    }
+  }
+
   const nextBeat = () => {
-    if (props.receivedBeats && props.receivedBeats.length > 0) {
+    if (Array.isArray(props.receivedBeats) && props.receivedBeats.length > 0) {
       const newIndex = (index + 1) % props.receivedBeats.length;
       setIndex(newIndex);
     }
     setSeekValue(0);
-    stopSound();
+    volumeChange(volume);
+    playSound();
   };
 
   const previousBeat = () => {
@@ -89,10 +100,11 @@ const Player: React.FC<PlayerProps> = (props) => {
       newSound.stop();
       newSound.seek(newSeekValue);
       newSound.play();
+      setVolume(volume);
     }
   }, 300);
 
-  const handleSeekChange = (e: any) => {
+  const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSeekValue = parseFloat(e.currentTarget.value);
     handleSeekChangeDebounced(newSeekValue);
     newSound?.play();
@@ -107,24 +119,27 @@ const Player: React.FC<PlayerProps> = (props) => {
   };
 
   return (
-    <div className="w-80 h-60 bg-gray-900 rounded-md flex flex-col justify-center items-center space-y-4">
+    <div className="w-80 h-60 bg-black rounded-md flex flex-col justify-center items-center space-y-4">
+      <div className='text-white text-lg flex font-bold'>
+        {props.receivedBeats[index]?.beatName}
+      </div>
       <div className="space-x-4">
-        <button onClick={playSound} className="bg-white text-black p-2 rounded-full">
+        <button onClick={playSound} className="bg-white text-black p-2 rounded-full hover:bg-yellow-100">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
             <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
         </svg>
         </button>
-        <button onClick={stopSound} className="bg-white text-black p-2 rounded-full">
+        <button onClick={stopSound} className="bg-white text-black p-2 rounded-full hover:bg-yellow-100">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
             <path fillRule="evenodd" d="M4.5 7.5a3 3 0 013-3h9a3 3 0 013 3v9a3 3 0 01-3 3h-9a3 3 0 01-3-3v-9z" clipRule="evenodd" />
         </svg>
         </button>
-        <button onClick={previousBeat} className="bg-white text-black p-2 rounded-full">
+        <button onClick={previousBeat} className="bg-white text-black p-2 rounded-full hover:bg-yellow-100">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
             <path d="M9.195 18.44c1.25.713 2.805-.19 2.805-1.629v-2.34l6.945 3.968c1.25.714 2.805-.188 2.805-1.628V8.688c0-1.44-1.555-2.342-2.805-1.628L12 11.03v-2.34c0-1.44-1.555-2.343-2.805-1.629l-7.108 4.062c-1.26.72-1.26 2.536 0 3.256l7.108 4.061z" />
         </svg>
         </button>
-        <button onClick={nextBeat} className="bg-white text-black p-2 rounded-full">
+        <button onClick={nextBeat} className="bg-white text-black p-2 rounded-full hover:bg-yellow-100">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
             <path d="M5.055 7.06c-1.25-.714-2.805.189-2.805 1.628v8.123c0 1.44 1.555 2.342 2.805 1.628L12 14.471v2.34c0 1.44 1.555 2.342 2.805 1.628l7.108-4.061c1.26-.72 1.26-2.536 0-3.256L14.805 7.06C13.555 6.346 12 7.25 12 8.688v2.34L5.055 7.06z" />
         </svg>
@@ -142,6 +157,7 @@ const Player: React.FC<PlayerProps> = (props) => {
           type="range"
           min="0"
           max="100"
+          step='1'
           value={volume}
           onChange={handleVolumeChange}
           className={styles.sliderVolume}

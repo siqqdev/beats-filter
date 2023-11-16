@@ -4,6 +4,8 @@ from .models import Beats
 from .serializers import BeatsSerializer
 from rest_framework import generics
 
+
+
 class BeatsApi(APIView):
     def get(self, request):
         beats_data = Beats.objects.all()

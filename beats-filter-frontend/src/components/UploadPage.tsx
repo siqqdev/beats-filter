@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { dataProps } from './dataInterface';
 
@@ -20,7 +20,7 @@ const UploadPage: React.FC<UploadPageProps> = () => {
   const apiUrl = 'http://127.0.0.1:8000';
 
   const beatSubmit = async () => {
-    if (beatFile) {
+    if (beatFile && beatName  && beatGenre && prodsNicknames) {
       try {
         const formData = new FormData();
         formData.append('beatFile', beatFile);
@@ -51,7 +51,7 @@ const UploadPage: React.FC<UploadPageProps> = () => {
         setExclusiveLeasePrice(0);
         window.location.reload();
       } catch (error: any) {
-        if (error.response) {
+        if (error.response ) {
           console.error('Server responded with an error:', error.response.data);
         } else if (error.request) {
           console.error('No response received from the server');
@@ -69,11 +69,11 @@ const UploadPage: React.FC<UploadPageProps> = () => {
       <div className="w-1/2 pr-4">
         <div className="mb-2 flex">
           <p className="w-1/4 font-bold mt-1">Name</p>
-          <input className="w-3/4 p-1 bg-gray-100 hover:bg-gray-200 rounded-md" type="text" value={beatName} onChange={(e) => setBeatName(e.target.value)} />
+          <input placeholder='Name'className="w-3/4 p-1 bg-gray-100 hover:bg-gray-200 rounded-md" type="text" value={beatName} onChange={(e) => setBeatName(e.target.value)} />
         </div>
         <div className="mb-2 flex">
           <p className="w-1/4 font-bold mt-1">Key</p>
-          <input className="w-3/4 p-1 bg-gray-100 hover:bg-gray-200 rounded-md" type="text" value={beatKey} onChange={(e) => setBeatKey(e.target.value)} />
+          <input placeholder='Key' className="w-3/4 p-1 bg-gray-100 hover:bg-gray-200 rounded-md" type="text" value={beatKey} onChange={(e) => setBeatKey(e.target.value)} />
         </div>
         <div className="mb-2 flex">
           <p className="w-1/4 font-bold mt-1">Bpm</p>
@@ -81,7 +81,7 @@ const UploadPage: React.FC<UploadPageProps> = () => {
         </div>
         <div className="mb-2 flex">
           <p className="w-1/4 font-bold mt-1">Prods nicknames</p>
-          <input className="w-3/4 p-1 bg-gray-100 hover:bg-gray-200 rounded-md" type="text" value={prodsNicknames} onChange={(e) => setProdsNicknames(e.target.value)} />
+          <input placeholder='Producers nicknames' className="w-3/4 p-1 bg-gray-100 hover:bg-gray-200 rounded-md" type="text" value={prodsNicknames} onChange={(e) => setProdsNicknames(e.target.value)} />
         </div>
         <div className="flex">
           <p className="w-1/4 font-bold mt-1">Choose Genre</p>
