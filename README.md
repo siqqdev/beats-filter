@@ -16,12 +16,15 @@ BeatSorter resolves this issue by allowing you to upload all your beats with jus
 
 ## Guide
 
-![image](https://github.com/siqqdev/beats-filter/assets/144137886/db7e366d-e011-476a-86f9-0b193879743d)
+
 1. Start by choosing the genres you would like to get
+![image](https://github.com/siqqdev/beats-filter/assets/144137886/db7e366d-e011-476a-86f9-0b193879743d)
+
+3. Click 'Let's Start' and you will receive all beats that contain the genres you've chosen. You can download them by clicking on 'download' icon
 ![image](https://github.com/siqqdev/beats-filter/assets/144137886/9faeb354-1a40-415f-9791-8ab7b97cbb6a)
-2. Click 'Let's Start' and you will receive all beats that contain the genres you've chosen. You can download them by clicking on 'download' icon
+
+5. To upload your beat, you can go through 'Upload' or 'Simple Upload'. No matter what you would like to use, on the 'Upload' page, you can fill only required fields (name, key, bpm, producer's nicknames, genre); others are not required.
 ![image](https://github.com/siqqdev/beats-filter/assets/144137886/63ec0f61-d97f-4269-80b9-6e8e16c3d619)
-3. To upload your beat, you can go through 'Upload' or 'Simple Upload'. No matter what you would like to use, on the 'Upload' page, you can fill only required fields (name, key, bpm, producer's nicknames, genre); others are not required.
 ![image](https://github.com/siqqdev/beats-filter/assets/144137886/a270e761-2c24-488b-9339-68ada2b1427e)
 
 
