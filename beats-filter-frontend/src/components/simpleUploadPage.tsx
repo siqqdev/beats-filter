@@ -1,12 +1,6 @@
-import React, { useState } from 'react'
-
-
 interface SimpleUploadPageProps {}
 
 const SimpleUploadPage: React.FC<SimpleUploadPageProps> = () => {
-
-const [beatName, setBeatName] = useState<string>('');
-
     return (
         <div className="p-5">
       <div className="pr-4 ">

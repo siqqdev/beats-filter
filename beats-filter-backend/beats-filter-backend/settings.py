@@ -56,7 +56,7 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-ROOT_URLCONF = 'beatsFilterBackend.urls'
+ROOT_URLCONF = 'beats-filter-backend.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'beatsFilterBackend.wsgi.application'
+WSGI_APPLICATION = 'beats-filter-backend.wsgi.application'
 
 
 # Database

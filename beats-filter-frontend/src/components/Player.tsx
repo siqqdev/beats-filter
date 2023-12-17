@@ -14,9 +14,7 @@ const Player: React.FC<PlayerProps> = (props) => {
   const [volume, setVolume] = useState<number>(50);
   const [index, setIndex] = useState<number>(0);
   const [seekValue, setSeekValue] = useState<number>(0);
-
-  const apiUrl = 'http://127.0.0.1:8000';
-
+  
   useEffect(() => {
     if (props.receivedBeats) {
       const mp3Beats = props.receivedBeats || [];

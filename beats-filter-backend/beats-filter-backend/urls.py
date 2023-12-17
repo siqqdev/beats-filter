@@ -8,7 +8,7 @@ from api import views
 urlpatterns = [ 
     path('admin/', admin.site.urls),
     path('api/beats/', BeatsApi.as_view()),
-    path('api/beats/filter/', BeatByGenresList.as_view(), name='beasts-by-genres'),  # Здесь имя было исправлено на 'beasts-by-genres'
+    path('api/beats/filter/', BeatByGenresList.as_view(), name='beasts-by-genres'),
 ]
 
 if settings.DEBUG:

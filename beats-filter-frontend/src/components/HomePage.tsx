@@ -6,7 +6,6 @@ import { dataProps } from './dataInterface';
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = (props) => {
-  const [mp3Urls, setMp3urls] = useState<string[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
   const [receivedData, setReceivedData] = useState<dataProps[]>([]);
 
@@ -66,7 +65,7 @@ const HomePage: React.FC<HomePageProps> = (props) => {
       <div className="font-semibold mt-3">
         <ul>
           {genres.map((genre, index) => (
-            <li key={index}>{genre}</li>
+            <li key={index} className='rounded-sm p-2'>{genre}</li>
           ))}
         </ul>
       </div>
@@ -94,7 +93,6 @@ const HomePage: React.FC<HomePageProps> = (props) => {
         </ul>
       </div>
       <div>
-      
       </div>
     </div>
   );
